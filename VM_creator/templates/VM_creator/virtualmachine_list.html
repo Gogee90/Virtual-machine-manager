@@ -1,0 +1,31 @@
+{% extends 'VM_creator/index.html' %}
+
+{% block content %}
+    <div class=row>
+        <h1>Активные ВМ</h1>
+        {% include 'VM_creator/create_vm.html' %}
+        {% if object_list %}
+            {% for vm in object_list %}
+                <div class="col s3 m4">
+                    <div class="card small horizontal">
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <p><strong>Конфигурация</strong>: {{ vm.configuration.name }}</p>
+                                <p><strong>Пул</strong>: {{ vm.pool.name }}</p>
+                                <p><strong>Подразделение</strong>: {{ vm.division.name }}</p>
+                                <p><strong>Название ВМ</strong>: {{ vm.name }}</p>
+                                <p><strong>Объём RAM, Гб</strong>: {{ vm.ram_capacity }} GB</p>
+                                <p><strong>Количество Ядер vCPU</strong>: {{ vm.cpu_cores }}</p>
+                                <p><strong>Объём HDD, Гб</strong>: {{ vm.hdd_capacity }} GB</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="{% url 'virtual-machine-edit' vm.pk %}">Посмотреть</a>
+                                <a href="{% url 'virtual-machine-delete' vm.pk %}">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

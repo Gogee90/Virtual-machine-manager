@@ -1,0 +1,60 @@
+{% extends 'VM_creator/index.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'VM_creator/slick-loader-master/slick-loader.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="valign-wrapper row vm-create-form" style="margin-top: 40px">
+        <div class="col card hoverable s10 pull-s1 m4 pull-m3 l12 pull-l3" style="width: 50%">
+            <div class="card-content">
+                <span class="card-title">Запросить новую ВМ</span>
+                <form method='post' id='vm-create-form'>
+                    {% csrf_token %}
+                    <p>
+                        <label for="id_configuration">Конфигурация:</label>
+                        {{ form.configuration }}
+                    </p>
+                    <p>
+                        <label for="id_pool">Пул:</label>
+                        {{ form.pool }}
+                    </p>
+                    <p>
+                        <label for="id_division">Подразделение:</label>
+                        {{ form.division }}
+                    </p>
+                    <p>
+                        <label for="id_name" class="active">Название ВМ:</label>
+                        {{ form.name }}
+                    </p>
+                    <p class="range-field">
+                        <label for="id_ram_capacity">Объём RAM, Гб:</label>
+                        {{ form.ram_capacity }}
+                    </p>
+                    <p class="range-field">
+                        <label for="id_cpu_cores">Количество Ядер vCPU:</label>
+                        {{ form.cpu_cores }}
+                    </p>
+                    <p class="range-field">
+                        <label for="id_hdd_capacity">Объём HDD, Гб:</label>
+                        {{ form.hdd_capacity }}
+                    </p>
+                    <div id="log"></div>
+                    {% if is_created %}
+                        <p></p>
+                    {% else %}
+                        <button type='submit' class="btn btn-default" id="id_submit_btn">Запросить</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'VM_creator/imask.js' %}"></script>
+    <script src="{% static 'VM_creator/X-Notify-main/x-notify.min.js' %}"></script>
+    <script src="{% static 'VM_creator/slick-loader-master/slick-loader.min.js' %}"></script>
+    <script src="{% static 'VM_creator/main.js' %}"></script>
+{% endblock %}

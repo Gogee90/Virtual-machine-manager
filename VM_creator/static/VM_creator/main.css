@@ -1,0 +1,11 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-style: normal;
+}
+
+.row .col.pull-l1 {
+    right: 0%;
+}
